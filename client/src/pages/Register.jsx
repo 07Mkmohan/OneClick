@@ -21,7 +21,7 @@ function Register() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -50,7 +50,9 @@ function Register() {
 
     if (!formData.mobileNumber.trim()) {
       newErrors.mobileNumber = "Mobile number is required";
-    } else if (!/^[0-9]{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
+    } else if (
+      !/^[0-9]{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))
+    ) {
       newErrors.mobileNumber = "Invalid mobile number";
     }
 
@@ -84,7 +86,10 @@ function Register() {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register", formData);
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        formData
+      );
       toast.success("Registration successful!");
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -112,7 +117,9 @@ function Register() {
                 onChange={handleChange}
                 className={errors.firstName ? "error" : ""}
               />
-              {errors.firstName && <span className="error-text">{errors.firstName}</span>}
+              {errors.firstName && (
+                <span className="error-text">{errors.firstName}</span>
+              )}
             </div>
             <div className="form-group">
               <label>Last Name</label>
@@ -123,7 +130,9 @@ function Register() {
                 onChange={handleChange}
                 className={errors.lastName ? "error" : ""}
               />
-              {errors.lastName && <span className="error-text">{errors.lastName}</span>}
+              {errors.lastName && (
+                <span className="error-text">{errors.lastName}</span>
+              )}
             </div>
           </div>
 
@@ -136,7 +145,9 @@ function Register() {
               onChange={handleChange}
               className={errors.dateOfBirth ? "error" : ""}
             />
-            {errors.dateOfBirth && <span className="error-text">{errors.dateOfBirth}</span>}
+            {errors.dateOfBirth && (
+              <span className="error-text">{errors.dateOfBirth}</span>
+            )}
           </div>
 
           <div className="form-group">
@@ -149,7 +160,9 @@ function Register() {
               placeholder="1234567890"
               className={errors.mobileNumber ? "error" : ""}
             />
-            {errors.mobileNumber && <span className="error-text">{errors.mobileNumber}</span>}
+            {errors.mobileNumber && (
+              <span className="error-text">{errors.mobileNumber}</span>
+            )}
           </div>
 
           <div className="form-group">
@@ -173,7 +186,9 @@ function Register() {
               onChange={handleChange}
               className={errors.password ? "error" : ""}
             />
-            {errors.password && <span className="error-text">{errors.password}</span>}
+            {errors.password && (
+              <span className="error-text">{errors.password}</span>
+            )}
           </div>
 
           <div className="form-group">
@@ -185,7 +200,9 @@ function Register() {
               onChange={handleChange}
               className={errors.confirmPassword ? "error" : ""}
             />
-            {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
+            {errors.confirmPassword && (
+              <span className="error-text">{errors.confirmPassword}</span>
+            )}
           </div>
 
           <button type="submit" className="auth-button" disabled={loading}>
@@ -202,5 +219,3 @@ function Register() {
 }
 
 export default Register;
-
-
