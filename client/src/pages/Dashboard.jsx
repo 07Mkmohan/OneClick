@@ -334,7 +334,6 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      {/* NAVBAR -------------------------------------------------- */}
       <nav className="dashboard-nav">
         <div className="nav-content">
           <h2>EmailSystem Dashboard</h2>
